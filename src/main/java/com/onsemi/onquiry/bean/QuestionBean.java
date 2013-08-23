@@ -46,6 +46,7 @@ public class QuestionBean {
      *  Return in JSON?
      */
     public String addNewQuestion(){
+       System.out.println("TEST2");
        return "";
     }
 }
