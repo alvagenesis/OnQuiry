@@ -27,8 +27,6 @@ public class User implements Serializable {
     private Long id;
     
     @Column
-    private String username;
-    @Column
     private String password;
     @Column(name = "first_name")
     private String firstName;
@@ -43,14 +41,6 @@ public class User implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {

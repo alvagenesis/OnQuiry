@@ -4,24 +4,22 @@
  */
 package com.onsemi.onquiry.service.hibernate;
 
-import com.onsemi.onquiry.dao.UserDao;
 import com.onsemi.onquiry.entity.User;
 import com.onsemi.onquiry.exception.OnQuiryServiceException;
 import com.onsemi.onquiry.service.UserService;
 import org.apache.log4j.Logger;
-import org.apache.log4j.Priority;
 
 /**
  *
  * @author ffzwqy
  */
 public class HibernateUserService implements UserService {
-
-    private UserDao userDao;
-    Logger logger = Logger.getLogger(HibernateUserService.class);
     
-    public HibernateUserService(UserDao userDao) {
-        this.userDao = userDao;
+    Logger logger = Logger.getLogger(HibernateUserService.class);
+    HibernateEntityManager<User> entityManager;
+    
+    public HibernateUserService(HibernateEntityManager<User> entityManager) {
+        this.entityManager = entityManager;
     }
     
     @Override
@@ -29,12 +27,18 @@ public class HibernateUserService implements UserService {
         //TODO: Perform other validations here
         logger.debug("registerUser(" + user.toString() + ")");
         
+        entityManager.startTransaction();
+        
         try {
-            userDao.addUser(user);
-        } catch(Exception ex) {
-            logger.fatal("registerUser: " + ex.getLocalizedMessage());
-            throw ex;
+            
+            entityManager.persist(user);
+            entityManager.commitTransaction();
+        } catch(Exception exception) {
+            entityManager.rollbackTransaction();
+        } finally {
+            entityManager.endTransaction();
         }
+        
         
     }
     

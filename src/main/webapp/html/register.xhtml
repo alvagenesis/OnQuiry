@@ -9,9 +9,9 @@
         <h1>Register</h1>
         <h:form>
             <h:panelGrid columns="2">
-                <h:outputText value="Username: " />
-                <h:inputText value="#{registerBean.user.username}"/>
-            
+                <h:outputText value="Email Address: " />
+                <h:inputText value="#{registerBean.user.emailAddress}"/>
+                
                 <h:outputText value="Password: " />
                 <h:inputSecret value="#{registerBean.user.password}"/>
                 
@@ -21,8 +21,6 @@
                 <h:outputText value="Last Name: " />
                 <h:inputText value="#{registerBean.user.lastName}"/>
                 
-                <h:outputText value="Email Address: " />
-                <h:inputText value="#{registerBean.user.emailAddress}"/>
                 
             </h:panelGrid>
             
