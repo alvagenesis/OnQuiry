@@ -7,5 +7,10 @@
 		<pattern value="/Register" />
 		<view-id value="/html/register.xhtml" />
 	</url-mapping>
+        
+        <url-mapping id="ask">
+		<pattern value="/ask" />
+		<view-id value="/html/add_question.xhtml" />
+	</url-mapping>
 
 </pretty-config>
