@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -11,23 +10,38 @@
         
         <ui:composition template="/html/template/layout.xhtml">
             <div class="wrapper">
-                <h2>Add Question</h2>
-                <div style="position: relative"><hr/><br/></div>
-                <h:form>
-                    <h:outputLabel>Topic</h:outputLabel>
+                <div id="div_ask_form">
+                    <h3>Add Question</h3>
 
-                    <div style="position: relative"><hr/><br/></div>
-                    
-                    <h:outputLabel>Question</h:outputLabel>
-                    <h:inputText value="#{questionBean.question.header}" />
+                    <h:form id="ask_form">
+                        <div class="hr_div"><hr/></div>
 
-                    <div style="position: relative"><hr/><br/></div>
-                    <h:outputLabel>Detail</h:outputLabel>
-                    <h:inputTextarea value="#{questionBean.question.details}"></h:inputTextarea>
+                        <div class="ask_row">
+                            <h:inputText value="#{questionBean.question.header}" class="input_topic">
+                                 <f:passThroughAttribute name="placeholder" value="Select Topic" />
+                            </h:inputText>
+                        </div>
 
-                   <div style="position: relative"><hr/><br/></div>
-                    <h:commandButton value="Submit" action="#{questionBean.addNewQuestion}"/>
-                </h:form>
+                        <div class="hr_div"><hr/></div>
+
+                        <div class="ask_row">
+                            <h:inputText value="#{questionBean.question.header}">
+                                 <f:passThroughAttribute name="placeholder" value="Type Question Here" />
+                            </h:inputText>
+                        </div>
+
+                        <div class="hr_div"><hr/></div>
+
+                        <div class="ask_row" id="details">
+                            <h:inputTextarea value="#{questionBean.question.details}">
+                                 <f:passThroughAttribute name="placeholder" value="Optional: Provide more details here" />
+                            </h:inputTextarea>
+                        </div>
+
+                        <div class="hr_div"><hr/></div>
+                        <h:commandButton value="Submit" action="#{questionBean.addNewQuestion}"/>
+                    </h:form>
+                </div>
             </div>
         </ui:composition>
         
