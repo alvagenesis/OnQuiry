@@ -43,7 +43,7 @@ public class QuestionBean {
     
     /*
      *  Add new Question
-     *  Return in JSON?
+     *  
      */
     public String addNewQuestion(){
        System.out.println("TEST2");

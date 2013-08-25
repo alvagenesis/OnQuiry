@@ -60,7 +60,7 @@ public class HibernateEntityManager<T> {
         }
     }
     
-    public void endTransaction() {
+    public void closeSession() {
         if(session != null && session.isOpen()) {
             session.close();
         }
@@ -73,7 +73,6 @@ public class HibernateEntityManager<T> {
     }
     
     private void populateBindVariableInQuery(Query query, Map<String, Object> parameters) {
-        
         for(Map.Entry<String, Object> entry : parameters.entrySet()) {
             query.setParameter(entry.getKey(), entry.getValue());
         }

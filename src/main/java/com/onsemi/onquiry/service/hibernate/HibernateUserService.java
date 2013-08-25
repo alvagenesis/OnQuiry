@@ -7,6 +7,8 @@ package com.onsemi.onquiry.service.hibernate;
 import com.onsemi.onquiry.entity.User;
 import com.onsemi.onquiry.exception.OnQuiryServiceException;
 import com.onsemi.onquiry.service.UserService;
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.log4j.Logger;
 
 /**
@@ -23,9 +25,13 @@ public class HibernateUserService implements UserService {
     }
     
     @Override
-    public void registerUser(User user) throws OnQuiryServiceException, Exception {
+    public void registerUser(User user) throws Exception {
         //TODO: Perform other validations here
         logger.debug("registerUser(" + user.toString() + ")");
+        
+        if(isUsedEmailAddress(user.getEmailAddress())) {
+            throw new OnQuiryServiceException("Email address " + user.getEmailAddress() + " is already used.");
+        }
         
         entityManager.startTransaction();
         
@@ -35,11 +41,37 @@ public class HibernateUserService implements UserService {
             entityManager.commitTransaction();
         } catch(Exception exception) {
             entityManager.rollbackTransaction();
+            logger.fatal("registerUser", exception);
+            throw exception;
         } finally {
-            entityManager.endTransaction();
+            entityManager.closeSession();
         }
         
+    }
+
+    @Override
+    public boolean isUsedEmailAddress(String emailAddress) throws Exception {
         
+        logger.debug("isUsedEmailAddress(" + emailAddress + ")");
+        
+        entityManager.openSession();
+        
+        Map<String,Object> parameter = new HashMap<String,Object>();
+        parameter.put("emailAddress", emailAddress);
+        
+        try {
+            User user = entityManager.findOneResult(User.FIND_USER_BY_EMAIL, parameter);
+            if(user != null) {
+                return true;
+            }
+        } catch(Exception exception) {
+            logger.fatal("isUsedEmailAddress", exception);
+            throw exception;
+        } finally {
+            entityManager.closeSession();
+        }
+        
+        return false;
     }
     
 }

@@ -13,8 +13,7 @@ import com.onsemi.onquiry.exception.OnQuiryServiceException;
  */
 public interface UserService {
     
-    void registerUser(User user) throws OnQuiryServiceException, Exception;
-    //boolean isUsernameExists(String username);
-    //boolean isUsedEmailAddress(String emailAddress);
+    void registerUser(User user) throws Exception;
+    boolean isUsedEmailAddress(String emailAddress) throws Exception;
     
 }

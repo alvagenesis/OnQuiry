@@ -8,7 +8,6 @@ import com.onsemi.onquiry.entity.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
-import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -79,7 +78,7 @@ public class HibernateEntityManagerTest {
         } catch (RuntimeException ex) {
             entityManager.rollbackTransaction();
         } finally {
-            entityManager.endTransaction();
+            entityManager.closeSession();
         }
 
         verify(tx).rollback();
@@ -107,7 +106,6 @@ public class HibernateEntityManagerTest {
     @Test(expected = HibernateEntityManagerException.class)
     public void testSessionNotOpen() throws HibernateEntityManagerException {
         SessionFactory sessionFactory = mock(SessionFactory.class);
-        Session session = mock(Session.class);
         
         HibernateEntityManager<User> entityManager = new HibernateEntityManager(sessionFactory, User.class);
         entityManager.findOneResult("", null);

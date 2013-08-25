@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -18,21 +19,24 @@ import javax.persistence.Table;
  */
 @Entity
 @Table (name = "user_table")
+@NamedQuery(name = "User.findUserByEmailAddress", query = "from User where emailAddress = :emailAddress")
 public class User implements Serializable {
     
     private static final long serialVersionUID = 1L;
+    
+    public static final String FIND_USER_BY_EMAIL = "User.findUserByEmailAddress";
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @Column
+    @Column(nullable = false)
     private String password;
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
     private String firstName;
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
     private String lastName;
-    @Column(name = "email_address")
+    @Column(name = "email_address", unique = true)
     private String emailAddress;
 
     public Long getId() {

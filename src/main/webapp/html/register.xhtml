@@ -8,6 +8,7 @@
     <h:body>
         <h1>Register</h1>
         <h:form>
+            <h:messages errorStyle="color: red;" warnStyle="color: yellow;" infoStyle="color: blue;" />
             <h:panelGrid columns="2">
                 <h:outputText value="Email Address: " />
                 <h:inputText value="#{registerBean.user.emailAddress}"/>
