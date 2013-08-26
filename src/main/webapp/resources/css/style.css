@@ -17,13 +17,18 @@ body{
     font-family: Georgia, serif;
     font-size: 1.3125em;
     color: #333;
+    background-color: #f2f9f6;
+     margin:0px 0px 0px 0px;
+    padding:0px 0px 0px 0px;
+    
 }
 
 #main{
+    background-image:-webkit-linear-gradient(top, #deefe9, #f2f9f6);
    
 }
 
-input{
+input,textarea{
     font-size: 80%;
     font-family: Georgia, serif;
 }
@@ -37,32 +42,15 @@ hr{
     width: 500px;
     overflow: auto;
     position: absolute;
+    margin:  0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    height: 1px;
+    border: 0; 
+    border-top: 1px solid #5aaf7d;
 }
 
-.mediumInput {
-    font-size: 18px;
-}
-
-/*
-    *********************************
-    Login
-    *********************************
-*/
-
-#header .wrapper #loginForm {
-    
-    float:right;
-    position: relative;
-    margin-top: 10px;
-}
-
-#loginBody {
-    margin: 0 100px 100px 100px;
-    padding: 0;
-}
-
-#loginBody input {
-    font-size: 18px;
+h3{
+    margin: 0px 0px 0px 0px;
 }
 
 /*
@@ -72,13 +60,13 @@ hr{
 */
 
 #header{
-    box-shadow: inset 0 -1px 0 #cacaca;
+    box-shadow: inset 0 -1px 0 #a9d5bb;
     height: 55px;
     width: 100%;
     position: relative;
-    top: 0px;
-    right: 0px;
-    margin-bottom: 60px;
+    margin:0px 0px 60px 0px;
+    padding:0px 0px 0px 0px;
+    
 }
 
 #header .wrapper{
@@ -105,9 +93,23 @@ hr{
 }
 #header li{
     display:inline;
-    padding: 0 10px 0 0;
+    letter-spacing:0.09em;
+    
 }
 
+.nav{
+    padding:13px 13px 13px 13px;
+    opacity: .6;
+    
+}
+.nav:hover{
+    display:inline;
+    padding:16px 13px 13px 13px;
+    opacity: 1;
+    color:#FFFFFF;
+    background-color: #c4e2d0;
+    
+}
 
 
 
@@ -123,6 +125,7 @@ hr{
     width:500px;
     height:auto;
     padding: 5px 5px;
+   
 }
 
 /*
@@ -132,20 +135,62 @@ hr{
 */
 
 #body{
-    height: 55px;
+    height: 100%;
     width: 100%;
     position: relative;
     top: 0px;
     right: 0px;
+    
 }
 
 #body .wrapper{
     margin: 0 auto;
     width:980px;
-    overflow: auto;
+    
   
 }
 
+#body .hr_div{
+  padding:5px 0 5px 0;
+}
+
+#div_ask_form{
+    width: 500px;
+    background-color: #FFFFFF;
+    padding: 10px 10px 10px 10px;
+    box-shadow: 1px 3px 8px rgba(0,0,0,0.2);
+}
+
+.ask_row{
+   position: relative;
+   margin: 10px 0 10px 0;
+}
+
+.ask_row label{
+    width: 100px;
+    display: block;
+    padding-top: 5px;
+    float:left;
+}
+
+#ask_form #details{
+    height:100%;
+}
+
+#ask_form input[type="text"].input_topic{
+    width: 150px;
+}
+
+#ask_form input[type="text"]{
+    width: 500px;
+    padding: 5px 0 5px 0; 
+}
+
+#ask_form textarea{
+    width: 500px;
+    padding:5px 0px 1px 0px;
+    height: 100px;
+}
 
 /*
     *********************************
@@ -175,19 +220,23 @@ hr{
 ::-webkit-input-placeholder {
     font-size: 90%;
     font-family: Georgia, serif;
+    padding: 0 0 0 2px;
 }
 
 :-moz-placeholder { /* Firefox 18- */
     font-size: 90%;
     font-family: Georgia, serif;
+    padding: 0 0 0 2px;
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
     font-size: 90%;
     font-family: Georgia, serif;
+    padding: 0 0 0 2px;
 }
 
 :-ms-input-placeholder {  
     font-size: 90%;
     font-family: Georgia, serif;
+    padding: 0 0 0 2px;
 }
