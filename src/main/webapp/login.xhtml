@@ -1,30 +1,90 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <f:event type="preRenderView" listener="#{loginBean.checkLogin}"/>
+        
     <h:head>
-        <title>Welcome to OnQuiry</title>
+        <h:outputStylesheet library="css" name="style.css"  />
     </h:head>
-    <h:body>
-        <h1>Login</h1>
-        <h:form>
+    
+        <h:body>
+            <div id="header">
+                <div class="wrapper">
 
-            <h:panelGrid columns="2">
-                <h:outputLabel for="username" value="Username:"/>
-                <h:inputText id="username" />
+                    <div id="logo">OnQuiry</div>
 
-                <h:outputLabel for="password" value="Password:"/>
-                <h:inputText id="password" />
+                    <div id="loginForm">
 
-            </h:panelGrid> 
-            <hr/>
-            <h:panelGrid columns="2">
-                <h:commandButton value="Login"/>
-                <h:commandButton value="Register"/>
-            </h:panelGrid>
+                        <h:form id="login">
+
+                            <h:inputText class="mediumInput" value="#{loginBean.emailAddress}">
+                                <f:passThroughAttribute name="placeholder" value="Email" />
+                            </h:inputText>
+
+                            <h:inputSecret class="mediumInput" value="#{loginBean.password}">
+                                <f:passThroughAttribute name="placeholder" value="Password" />
+                            </h:inputSecret>
+
+                            <h:commandButton value="Login" action="#{loginBean.login}" style="font-size: 16px;" >
+                                <f:ajax execute="login loginMessage"  render="loginMessage"  />
+                            </h:commandButton>
+                            <div style="font-size: 12px; width: 300px; position: absolute;">
+                                <p:messages for="login" id="loginMessage" autoUpdate="true" showDetail="true" showSummary="false"/>
+                            </div>
+                        </h:form>
+
+                    </div>
+                </div>
+            </div>
 
 
-        </h:form>
-    </h:body>
+
+            <div id="loginBody">
+                <h1 style="margin: 0; padding: 0;">Join Us</h1>
+                <h:form id="register">
+                    <div style="font-size: 12px !important; width: 300px;">
+                        <p:messages for="register" autoUpdate="true" id="registrationMessage" showDetail="true" showSummary="false"/>
+                    </div>
+                    <h:panelGrid columns="2" style="font-size: 12px;">
+
+                        <h:inputText id="rEmailAddress" value="#{registerBean.user.emailAddress}" required="true" requiredMessage="Email address is required." validatorMessage="Invalid email address." >
+                            <f:ajax execute="@this" render="rEmailAddressMessage" event="blur" />
+                            <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                            <f:passThroughAttribute name="placeholder" value="Email Address" />
+                        </h:inputText>
+                        <p:message for="rEmailAddress" id="rEmailAddressMessage" />
+
+                        <h:inputSecret id="rPassword" value="#{registerBean.user.password}" required="true" validatorMessage="Password should be atleast 8 characters" requiredMessage="Password is required.">
+                            <f:ajax execute="@this" render="rPasswordMessage" event="blur" />
+                            <f:passThroughAttribute name="placeholder" value="Password" />
+                            <f:validateLength minimum="8" />
+                        </h:inputSecret>
+                        <p:message for="rPassword" id="rPasswordMessage" />
+
+                        <h:inputText id="rFirstName" value="#{registerBean.user.firstName}" style="text-transform: capitalize;" required="true" requiredMessage="First name is required.">
+                            <f:ajax execute="@this" render="rFirstNameMessage" event="blur" />
+                            <f:passThroughAttribute name="placeholder" value="First Name" />
+                        </h:inputText>
+                        <p:message for="rFirstName" id="rFirstNameMessage" />
+
+                        <h:inputText id="rLastName" value="#{registerBean.user.lastName}" style="text-transform: capitalize;" required="true" requiredMessage="Last name is required.">
+                            <f:ajax execute="@this" render="rLastNameMessage" event="blur" />
+                            <f:passThroughAttribute name="placeholder" value="Last Name" />
+                        </h:inputText>
+                        <p:message for="rLastName" id="rLastNameMessage" />
+
+                        <h:commandButton value="Join Us" action="#{registerBean.register}" >
+                            <f:ajax execute="register" render="register registrationMessage" />
+                        </h:commandButton>
+                    </h:panelGrid>
+                </h:form>
+            </div>
+
+            <ui:include src="html/template/footer.xhtml"/>
+        </h:body>
 </html>
 

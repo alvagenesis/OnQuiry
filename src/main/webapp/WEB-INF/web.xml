@@ -5,11 +5,11 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
-   <listener>
+    <listener>
         <listener-class>
-          com.sun.faces.config.ConfigureListener
+            com.sun.faces.config.ConfigureListener
         </listener-class>
-      </listener>
+    </listener>
     
     <context-param>
         <description>
@@ -24,13 +24,13 @@
     </context-param>
 
     <!-- Faces Servlet -->
-  <servlet>
-    <servlet-name>Faces Servlet</servlet-name>
-    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
 
-  <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
@@ -38,5 +38,19 @@
     <welcome-file-list>
         <welcome-file>login.xhtml</welcome-file>
     </welcome-file-list>
+
+    <!-- Filters -->
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>com.onsemi.onquiry.filter.LoginFilter</filter-class>
+        <init-param>
+            <param-name>loginURI</param-name>
+            <param-value>/login.xhtml</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
 </web-app>

@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>OnQuiry - <span style="text-transform: capitalize;">#{accountBean.user.firstName} Profile</span></title>
+    </h:head>
+    <h:body>
+
+        <ui:composition template="/html/template/layout.xhtml">
+            <div class="wrapper">
+
+                <h2>Your Information</h2>
+                <h:panelGrid columns="2">
+                    <h:outputText value="Email Address: " />
+                    <h:outputText value="#{accountBean.user.emailAddress}"/>
+
+                    <h:outputText value="First Name: " />
+                    <h:outputText style="text-transform: capitalize;" value="#{accountBean.user.firstName}"/>
+
+                    <h:outputText value="Last Name: " />
+                    <h:outputText style="text-transform: capitalize;" value="#{accountBean.user.lastName}"/>
+
+                </h:panelGrid>
+
+                <h2>Change Password</h2>
+                <h:form id="changePassword">
+                    <div style="font-size: 14px; width: 300px;">
+                        <p:messages for="changePassword" id="changePasswordMessage" autoUpdate="true" showDetail="true" showSummary="false" />
+                    </div>
+
+                    <h:panelGrid columns="1">
+                        <h:inputSecret class="mediumInput" value="#{accountBean.oldPassword}">
+                            <f:passThroughAttribute name="placeholder" value="Old Password" />
+                        </h:inputSecret>
+
+                        <h:inputSecret class="mediumInput" value="#{accountBean.newPassword}">
+                            <f:passThroughAttribute name="placeholder" value="New Password" />
+                        </h:inputSecret>
+
+                        <h:commandButton value="Change" action="#{accountBean.changePassword}">
+                            <f:ajax execute="changePassword" render="changePasswordMessage changePassword" />
+                        </h:commandButton>
+                    </h:panelGrid>
+                </h:form>
+
+            </div>
+        </ui:composition>
+    </h:body>
+</html>

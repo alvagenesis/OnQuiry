@@ -5,15 +5,17 @@
 package com.onsemi.onquiry.service.hibernate;
 
 import com.onsemi.onquiry.entity.User;
-import com.onsemi.onquiry.exception.OnQuiryServiceException;
+import com.onsemi.onquiry.service.ServiceException;
+import com.onsemi.onquiry.service.ServiceUtility;
 import com.onsemi.onquiry.service.UserService;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.log4j.Logger;
 
 /**
- *
- * @author ffzwqy
+ * A Hibernate implementation of the UserService class
+ * 
+ * @author Ejay Canaria
  */
 public class HibernateUserService implements UserService {
     
@@ -30,13 +32,13 @@ public class HibernateUserService implements UserService {
         logger.debug("registerUser(" + user.toString() + ")");
         
         if(isUsedEmailAddress(user.getEmailAddress())) {
-            throw new OnQuiryServiceException("Email address " + user.getEmailAddress() + " is already used.");
+            throw new ServiceException("Email address " + user.getEmailAddress() + " is already used.");
         }
         
         entityManager.startTransaction();
         
         try {
-            
+            user.setPassword(ServiceUtility.encryptPassword(user.getPassword()));
             entityManager.persist(user);
             entityManager.commitTransaction();
         } catch(Exception exception) {
@@ -73,5 +75,59 @@ public class HibernateUserService implements UserService {
         
         return false;
     }
+
+    @Override
+    public User login(String emailAddress, String password) throws Exception {
+        logger.debug("login(" + emailAddress + "," + password + ")");
+        
+        entityManager.openSession();
+        Map<String,Object> parameter = new HashMap<String,Object>();
+        parameter.put("emailAddress", emailAddress);
+        parameter.put("password", ServiceUtility.encryptPassword(password));
+        
+        try {
+            
+            User user = entityManager.findOneResult(User.FIND_USER_BY_EMAIL_AND_PASSWORD, parameter);
+            if(user == null) {
+                throw new ServiceException("Invalid email address or password");
+            }
+            
+            return user;
+        } catch(Exception exception) {
+            logger.fatal("login", exception);
+            throw exception;
+        } finally {
+            entityManager.closeSession();
+        }
+
+    }
+
+    @Override
+    public void changePassword(Long id, String oldPassword, String newPassword) throws Exception {
+        oldPassword = ServiceUtility.encryptPassword(oldPassword);
+        
+        entityManager.startTransaction();
+        
+        try {
+            User user = entityManager.findResultById(id);
+            
+            System.out.println("old: " + oldPassword + " vs " + user.getPassword());
+            if(!oldPassword.equals(user.getPassword())) {
+                throw new ServiceException("Invalid old password.");
+            }
+            
+            user.setPassword(ServiceUtility.encryptPassword(newPassword));
+            
+            entityManager.commitTransaction();
+        } catch(Exception exception) {
+            entityManager.rollbackTransaction();
+            logger.fatal("update", exception);
+            throw exception;
+        } finally {
+            entityManager.closeSession();
+        }
+    }
+    
+    
     
 }

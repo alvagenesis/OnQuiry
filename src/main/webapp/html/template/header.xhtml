@@ -10,7 +10,7 @@
         <div id="header">
             <div class="wrapper">
                 
-                <div  id="logo">OnQuiry</div>
+                <div  id="logo"><a href="/home">OnQuiry</a></div>
                 <div >
                     <h:form >
                         <h:inputText id="searchBox" class="searchBox">
@@ -21,14 +21,17 @@
                  
                
                 <div id="nav" >
+                    <h:form>
                     <ul>
                         <li><a href="/ask">Ask</a></li>
                         <li><span class="bullet"> |  </span></li>
-                        <li>Inigo</li>
+                        <li style="text-transform: capitalize;"><a href="/profile">#{accountBean.user.firstName}</a></li>
+                        <li><span class="bullet"> |  </span></li>
+                        <li><h:commandLink value="Logout" action="#{accountBean.logout()}"/></li>
                     </ul>
+                    </h:form>
                 </div>   
-                    
-              
+                                  
                
             </div>
             

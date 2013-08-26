@@ -39,6 +39,32 @@ hr{
     position: absolute;
 }
 
+.mediumInput {
+    font-size: 18px;
+}
+
+/*
+    *********************************
+    Login
+    *********************************
+*/
+
+#header .wrapper #loginForm {
+    
+    float:right;
+    position: relative;
+    margin-top: 10px;
+}
+
+#loginBody {
+    margin: 0 100px 100px 100px;
+    padding: 0;
+}
+
+#loginBody input {
+    font-size: 18px;
+}
+
 /*
     *********************************
     Header
@@ -97,7 +123,6 @@ hr{
     width:500px;
     height:auto;
     padding: 5px 5px;
-   
 }
 
 /*

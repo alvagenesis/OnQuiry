@@ -10,26 +10,31 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+
 /**
  *
- * @author ffzwqy
+ * @author Ejay Canaria
  */
 @Entity
-@Table (name = "user_table")
-@NamedQuery(name = "User.findUserByEmailAddress", query = "from User where emailAddress = :emailAddress")
+@Table(name = "user_table")
+@org.hibernate.annotations.Entity(dynamicUpdate = true, selectBeforeUpdate = true)
+@NamedQueries({
+    @NamedQuery(name = "User.findUserByEmailAddress", query = "from User where emailAddress = :emailAddress"),
+    @NamedQuery(name = "User.findUserByEmailAndPassword", query = "from User where emailAddress = :emailAddress and password = :password")
+})
 public class User implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
-    
     public static final String FIND_USER_BY_EMAIL = "User.findUserByEmailAddress";
+    public static final String FIND_USER_BY_EMAIL_AND_PASSWORD = "User.findUserByEmailAndPassword";
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
     @Column(nullable = false)
     private String password;
     @Column(name = "first_name", nullable = false)
@@ -78,7 +83,7 @@ public class User implements Serializable {
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -101,7 +106,6 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "com.onsemi.onquiry.entity.User2[ id=" + id + " ]";
+        return "com.onsemi.onquiry.entity.User[ id=" + id + " ]";
     }
-    
 }
