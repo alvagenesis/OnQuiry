@@ -124,6 +124,7 @@ public class HibernateUserService implements UserService {
         } catch(ServiceException serviceException) {
             entityManager.rollbackTransaction();
             logger.warn("update: " + serviceException.getMessage());
+            throw serviceException;
         } catch(Exception exception) {
             entityManager.rollbackTransaction();
             logger.fatal("update", exception);

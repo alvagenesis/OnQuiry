@@ -49,8 +49,30 @@ hr{
     border-top: 1px solid #5aaf7d;
 }
 
-h3{
-    margin: 0px 0px 0px 0px;
+.mediumInput {
+    font-size: 18px;
+}
+
+/*
+    *********************************
+    Login
+    *********************************
+*/
+
+#header .wrapper #loginForm {
+    
+    float:right;
+    position: relative;
+    margin-top: 10px;
+}
+
+#loginBody {
+    margin: 0 100px 100px 100px;
+    padding: 0;
+}
+
+#loginBody input {
+    font-size: 18px;
 }
 
 /*
