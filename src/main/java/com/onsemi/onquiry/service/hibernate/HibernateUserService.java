@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.onsemi.onquiry.service.hibernate;
 
 import com.onsemi.onquiry.entity.User;
@@ -93,6 +89,9 @@ public class HibernateUserService implements UserService {
             }
             
             return user;
+        } catch(ServiceException serviceException) {
+            logger.warn("login: " + serviceException);
+            throw serviceException;
         } catch(Exception exception) {
             logger.fatal("login", exception);
             throw exception;
@@ -104,21 +103,27 @@ public class HibernateUserService implements UserService {
 
     @Override
     public void changePassword(Long id, String oldPassword, String newPassword) throws Exception {
+        logger.debug("changePassword(" + id + ")");
+        
         oldPassword = ServiceUtility.encryptPassword(oldPassword);
+        newPassword = ServiceUtility.encryptPassword(newPassword);
         
         entityManager.startTransaction();
         
         try {
             User user = entityManager.findResultById(id);
             
-            System.out.println("old: " + oldPassword + " vs " + user.getPassword());
             if(!oldPassword.equals(user.getPassword())) {
                 throw new ServiceException("Invalid old password.");
             }
             
-            user.setPassword(ServiceUtility.encryptPassword(newPassword));
+            user.setPassword(newPassword);
             
             entityManager.commitTransaction();
+            
+        } catch(ServiceException serviceException) {
+            entityManager.rollbackTransaction();
+            logger.warn("update: " + serviceException.getMessage());
         } catch(Exception exception) {
             entityManager.rollbackTransaction();
             logger.fatal("update", exception);
