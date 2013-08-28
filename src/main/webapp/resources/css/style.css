@@ -38,16 +38,7 @@ a, a:visited{
     color: #333;
 }
 
-hr{
-    width: 500px;
-    overflow: auto;
-    position: absolute;
-    margin:  0px 0px 0px 0px;
-    padding: 0px 0px 0px 0px;
-    height: 1px;
-    border: 0; 
-    border-top: 1px solid #5aaf7d;
-}
+
 
 .mediumInput {
     font-size: 18px;
@@ -133,6 +124,11 @@ hr{
     
 }
 
+.bullet{
+    padding:16px 0px 13px 0px; 
+    margin:0px 0px 0px 0px; 
+}
+
 
 
 
@@ -149,6 +145,36 @@ hr{
     padding: 5px 5px;
    
 }
+
+.search_button{
+    padding:9.5px 9px 6.5px 9px;
+    background: linear-gradient(to bottom, #fff 0, #f3f3f3 100%);
+    border: 1px solid #cecece;
+    border-bottom-color: #a0a0a0;
+    font-size: 13px;
+    font-family: 'Droid Sans', sans-serif;
+    position:relative;
+    font-weight: bold;
+    color:#6a6a6a;
+    position:relative;
+    left:-2px;
+}
+
+.search_button:hover{
+     padding:9.5px 9px 6.5px 9px;
+    background: linear-gradient(to bottom, #fff 0, #dadada 100%);
+    border: 1px solid #cecece;
+    border-bottom-color: #a0a0a0;
+    font-size: 13px;
+    font-family: 'Droid Sans', sans-serif;
+    position:relative;
+    left:-2px;
+    color:#6a6a6a;
+    cursor: pointer; 
+}
+
+
+
 
 /*
     *********************************
@@ -172,12 +198,8 @@ hr{
   
 }
 
-#body .hr_div{
-  padding:5px 0 5px 0;
-}
-
 #div_ask_form{
-    width: 500px;
+    width: 560px;
     background-color: #FFFFFF;
     padding: 10px 10px 10px 10px;
     box-shadow: 1px 3px 8px rgba(0,0,0,0.2);
@@ -204,15 +226,33 @@ hr{
 }
 
 #ask_form input[type="text"]{
-    width: 500px;
+    width: 560px;
     padding: 5px 0 5px 0; 
 }
 
 #ask_form textarea{
-    width: 500px;
+    width: 560px;
     padding:5px 0px 1px 0px;
     height: 100px;
 }
+
+
+#body .hr_div{
+  padding:5px 0 5px 0;
+}
+
+
+#div_ask_form hr{
+    width: 560px;
+    overflow: auto;
+    position: absolute;
+    margin:  0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    height: 1px;
+    border: 0; 
+    border-top: 1px solid #5aaf7d;
+}
+
 
 /*
     *********************************
