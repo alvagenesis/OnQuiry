@@ -1,3 +1,7 @@
 OnQuiry
 
 Question and Answer Application
+
+To Run Application: jetty:run
+
+In NetBeans - Properties -> Actions -> Run Project -> Execute Goals : package jetty:run
